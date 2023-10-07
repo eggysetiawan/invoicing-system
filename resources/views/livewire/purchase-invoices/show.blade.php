@@ -38,9 +38,9 @@
                                 <tr class="border text-center">
                                     <td class="border px-12 py-2">{{ $loop->iteration }}</td>
                                     <td class="border px-12 py-2">{{ $invoice->fruitItem->fruitCategory->name }}</td>
-                                    <td class="border px-12 py-2">{{ $invoice->fruititem->name }}</td>
-                                    <td class="border px-12 py-2">{{ $invoice->fruititem->unit }}</td>
-                                    <td class="border px-12 py-2">{{ $invoice->fruititem->price }}</td>
+                                    <td class="border px-12 py-2">{{ $invoice->fruitItem->name }}</td>
+                                    <td class="border px-12 py-2">{{ $invoice->fruitItem->unit }}</td>
+                                    <td class="border px-12 py-2">{{ $invoice->fruitItem->price }}</td>
                                     <td class="border px-12 py-2">{{ $invoice->qty }}</td>
                                     <td class="border px-12 py-2">{{ $invoice->amount }}</td>
                                 </tr>

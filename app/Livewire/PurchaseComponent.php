@@ -12,7 +12,7 @@ class PurchaseComponent extends \Livewire\Component
     public string $customer;
     public \Illuminate\Database\Eloquent\Collection $fruitItems;
     public array $fruits;
-
+    public string $button = 'save';
     public function add()
     {
         $this->count++;
@@ -40,7 +40,6 @@ class PurchaseComponent extends \Livewire\Component
             $fruit['updated_at'] = $now;
             $attr[] = $fruit;
         }
-
 
         session()->flash('message', __('Purchase successfully created.'));
 

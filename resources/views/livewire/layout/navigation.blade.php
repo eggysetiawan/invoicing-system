@@ -50,7 +50,8 @@ new class extends Component {
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('purchase_invoices.index')" :active="request()->routeIs('purchases_invoices.index') ||
-                        request()->routeIs('purchase_invoices.create')" wire:navigate>
+                        request()->routeIs('purchase_invoices.create') ||
+                        request()->routeIs('purchase_invoices.edit')" wire:navigate>
                         {{ __('Purchase Invoice') }}
                     </x-nav-link>
                 </div>

@@ -113,7 +113,7 @@
                                     class="text-center  bg-red-600 rounded-lg px-10 py-2 text-white uppercase {{ $count < 2 ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer' }}">remove</a>
                             </div>
                             <div class="flex mt-10 items-center gap-4">
-                                <x-submit>{{ __('Save') }}</x-submit>
+                                <x-submit>{{ __($button) }}</x-submit>
                             </div>
                         </form>
                     </section>

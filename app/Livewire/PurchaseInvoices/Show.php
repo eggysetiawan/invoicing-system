@@ -11,7 +11,10 @@ class Show extends Component
     public function mount(\App\Models\Purchase $purchase)
     {
         $this->purchaseInvoices = \App\Models\Purchase::query()
-            ->with('fruitItem.fruitCategory:id,name')
+            ->with([
+                'fruitItem.fruitCategory:id,name',
+                'fruitItem:id,unit,price,fruit_category_id,name',
+            ])
             ->where('slug', $purchase->slug)
             ->latest('updated_at')
             ->get();

@@ -8,13 +8,16 @@ class Edit extends \App\Livewire\PurchaseComponent
 {
     public function mount(\App\Models\Purchase $purchase)
     {
-        // $this->count = 1;
+        $this->customer = $purchase->customer;
         $this->fruits = $this->getFruits($purchase);
+
+        $this->count = count($this->fruits);
+
+        $this->button = 'update';
 
         $this->fruitItems = \App\Models\FruitItem::query()
             ->orderBy('name')
             ->get(['id', 'name', 'unit', 'price']);
-        // $this->fruits = [];
     }
 
     public function getFruits(\App\Models\Purchase $purchase)

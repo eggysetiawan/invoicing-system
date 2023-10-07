@@ -15,7 +15,7 @@
                     <table class="table-auto w-full">
                         <thead>
                             <tr>
-                                <th class="border px-4 py-2 text-center">No.</th>
+                                <th class="border px-4 py-2 text-center">{{ __('No.') }}</th>
                                 <th class="border px-4 py-2 text-center">{{ __('Fruit Category') }}</th>
                             </tr>
                         </thead>

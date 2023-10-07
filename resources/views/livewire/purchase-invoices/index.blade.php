@@ -18,6 +18,7 @@
                                 <th class="px-4 py-2 border">No.</th>
                                 <th class="px-4 py-2 border">{{ __('Name') }}</th>
                                 <th class="px-4 py-2 border">{{ __('Action') }}</th>
+
                             </tr>
                         </thead>
                         <tbody>
@@ -25,9 +26,14 @@
                                 <tr class="border text-center">
                                     <td class="border px-12 py-2">{{ $loop->iteration }}</td>
                                     <td class="border px-12 py-2">{{ $invoice->customer }}</td>
-                                    <td class="border px-12 py-2"><a
-                                            href="{{ route('purchase_invoices.show', ['purchase' => $invoice->slug]) }}"
-                                            class="text-blue-500 underline">{{ __('View Detail') }}</a>
+                                    <td class="border px-12 py-2">
+                                        <div class="grid grid-cols-2 gap-1 px-0">
+
+                                            <a href="{{ route('purchase_invoices.show', ['purchase' => $invoice->slug]) }}"
+                                                class="text-blue-500 underline">{{ __('View Detail') }}</a>
+                                            <a class="text-red-500 underline"
+                                                wire:click='destroy($invoice->slug)'>delete</a>
+                                        </div>
                                     </td>
                                 </tr>
                             @empty

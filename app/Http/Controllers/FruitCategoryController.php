@@ -13,7 +13,12 @@ class FruitCategoryController extends Controller
      */
     public function index()
     {
-        //
+
+        $fruitCategories = FruitCategory::query()
+            ->latest('updated_at')
+            ->get();
+
+        return view('fruit_categories.index', compact('fruitCategories'));
     }
 
     /**
@@ -21,7 +26,9 @@ class FruitCategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('fruit_categories.create', [
+            'fruitCategory' => new FruitCategory(),
+        ]);
     }
 
     /**

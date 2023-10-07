@@ -16,4 +16,9 @@ class Purchase extends Model
     {
         return $this->belongsTo(User::class, 'customer_id', 'id');
     }
+
+    public function fruitItem()
+    {
+        return $this->belongsTo(FruitItem::class);
+    }
 }

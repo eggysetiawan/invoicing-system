@@ -25,12 +25,33 @@ Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
 
-Route::controller(\App\Models\FruitCategory::class)
+Route::controller(\App\Http\Controllers\FruitCategoryController::class)
     ->prefix('fruit-categories')
     ->name('fruit_categories.')
     ->middleware('auth')
     ->group(function () {
         Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+    });
+
+Route::controller(\App\Http\Controllers\FruitItemController::class)
+    ->prefix('fruit-items')
+    ->name('fruit_items.')
+    ->middleware('auth')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+    });
+
+
+Route::prefix('purchase-invoices')
+    ->name('purchase_invoices.')
+    ->middleware('auth')
+    ->group(function () {
+        Route::get('/', App\Livewire\PurchaseInvoices\Index::class)->name('index');
+        Route::get('/create', \App\Livewire\PurchaseInvoices\Create::class)->name('create');
+        Route::get('{purchase:slug}/edit', \App\Livewire\PurchaseInvoices\Show::class)->name('show');
+        Route::get('{purchase:slug}', \App\Livewire\PurchaseInvoices\Show::class)->name('show');
     });
 
 require __DIR__ . '/auth.php';

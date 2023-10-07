@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,8 @@ class FruitCategoryFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => $name = \Illuminate\Support\Arr::random(['Apple', 'Mango', 'Orange', 'Guava']),
+            'slug' => Str::slug($name),
         ];
     }
 }

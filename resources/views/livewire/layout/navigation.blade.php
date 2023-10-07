@@ -36,8 +36,22 @@ new class extends Component {
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('categories.index')" :active="request()->routeIs('categories')" wire:navigate>
-                        {{ __('Category') }}
+                    <x-nav-link :href="route('fruit_categories.index')" :active="request()->routeIs('fruit_categories.index') ||
+                        request()->routeIs('fruit_categories.create')" wire:navigate>
+                        {{ __('Fruit Category') }}
+                    </x-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('fruit_items.index')" :active="request()->routeIs('fruit_items.index') || request()->routeIs('fruit_items.create')" wire:navigate>
+                        {{ __('Fruit Item') }}
+                    </x-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('purchase_invoices.index')" :active="request()->routeIs('purchases_invoices.index') ||
+                        request()->routeIs('purchase_invoices.create')" wire:navigate>
+                        {{ __('Purchase Invoice') }}
                     </x-nav-link>
                 </div>
             </div>
@@ -63,9 +77,9 @@ new class extends Component {
                     </x-slot>
 
                     <x-slot name="content">
-                        <x-dropdown-link :href="route('profile')" wire:navigate>
+                        {{-- <x-dropdown-link :href="route('profile')" wire:navigate>
                             {{ __('Profile') }}
-                        </x-dropdown-link>
+                        </x-dropdown-link> --}}
 
                         <!-- Authentication -->
                         <button wire:click="logout" class="w-full text-left">

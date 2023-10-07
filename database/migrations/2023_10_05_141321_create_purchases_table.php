@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('purchases', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor('fruit_item_id')->index();
-            $table->foreignIdFor('customer_id')->index();
+            $table->foreignId('fruit_item_id')->index();
+            $table->string('customer', 100);
+            $table->string('slug');
             $table->integer('qty');
             $table->integer('amount');
             $table->timestamps();

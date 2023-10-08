@@ -23,6 +23,7 @@ Require this package in your composer.json and install composer.
 
 ### Setup database with Laravel composer
 Setup your database and seeding data for this application
+But you need configure your .env before running command below
 
     php artisan migrate --seed
 

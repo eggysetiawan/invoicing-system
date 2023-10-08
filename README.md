@@ -24,7 +24,7 @@ Require this package in your composer.json and install composer.
 ### Setup database with Laravel composer
 Setup your database and seeding data for this application
 
-    ./vendor/bin/sail artisan migrate --seed
+    php artisan migrate --seed
 
 
 ### Available user

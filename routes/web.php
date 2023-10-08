@@ -51,8 +51,8 @@ Route::prefix('purchase-invoices')
         Route::get('/', App\Livewire\PurchaseInvoices\Index::class)->name('index');
         Route::get('/create', \App\Livewire\PurchaseInvoices\Create::class)->name('create');
         Route::get('{purchase:slug}/edit', \App\Livewire\PurchaseInvoices\Edit::class)->name('edit');
+        Route::get('{purchase:slug}/print', \App\Http\Controllers\PurchaseController::class)->name('print');
         Route::get('{purchase:slug}', \App\Livewire\PurchaseInvoices\Show::class)->name('show');
-        Route::delete('{purchase:slug}', \App\Http\Controllers\PurchaseController::class)->name('destroy');
     });
 
 require __DIR__ . '/auth.php';

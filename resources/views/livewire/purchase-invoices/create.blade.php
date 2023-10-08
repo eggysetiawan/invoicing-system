@@ -20,7 +20,7 @@
                             </p>
                         </header>
 
-                        <form wire:submit="handleSubmitPurchaseInvoice" class="mt-6 space-y-6">
+                        <form wire:submit="handleSubmitPurchaseInvoice({{ $purchase }})" class="mt-6 space-y-6">
                             <div>
                                 <x-input-label for="customer" :value="__('Customer Name')" />
                                 <x-text-input wire:model.live.debounce.550ms="customer" id="customer" name="customer"
@@ -85,7 +85,8 @@
                                             <x-input-label for="qty" :value="__('Qty')" />
                                             <x-text-input
                                                 wire:model.live.debounce.550ms="fruits.{{ $i }}.qty"
-                                                id="qty" name="qty" type="text" class="mt-1 block w-full"
+                                                id="qty" name="qty" type="text"
+                                                class="mt-1 block w-full {{ $errors->any() ? 'cursor-not-allowed' : 'cursor-text' }}"
                                                 autofocus autocomplete="qty" placeholder="ex: 10" />
                                             @error("fruits.$i.qty")
                                                 <x-input-error class="mt-2" :messages="$message" />
@@ -113,7 +114,8 @@
                                     class="text-center  bg-red-600 rounded-lg px-10 py-2 text-white uppercase {{ $count < 2 ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer' }}">remove</a>
                             </div>
                             <div class="flex mt-10 items-center gap-4">
-                                <x-submit>{{ __($button) }}</x-submit>
+                                <button {{ $errors->any() ? 'disable' : '' }}
+                                    class="{{ $errors->any() ? 'cursor-not-allowed' : '' }} inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150">{{ __($button) }}</button>
                             </div>
                         </form>
                     </section>

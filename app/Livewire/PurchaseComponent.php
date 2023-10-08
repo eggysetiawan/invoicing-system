@@ -13,6 +13,23 @@ class PurchaseComponent extends \Livewire\Component
     public \Illuminate\Database\Eloquent\Collection $fruitItems;
     public array $fruits;
     public string $button = 'save';
+    public \App\Models\Purchase $purchase;
+
+    protected function rules(): array
+    {
+        return [
+            'customer' => ['required', 'string', 'min:3', 'max:100'],
+            'fruits' => ['array'],
+            'fruits.*.fruit_item_id' => ['required'],
+            'fruits.*.qty' => ['required', 'numeric', 'required_with:fruits.*.fruit_item_id'],
+        ];
+    }
+
+    public function updated($property)
+    {
+        $this->validateOnly($property);
+    }
+
     public function add()
     {
         $this->count++;
@@ -23,9 +40,11 @@ class PurchaseComponent extends \Livewire\Component
         $this->count--;
     }
 
-    public function handleSubmitPurchaseInvoice()
+    public function getAttr(): array
     {
         $attr = [];
+
+        $now = now();
 
         foreach ($this->fruits as $fruit) {
             unset(
@@ -36,14 +55,38 @@ class PurchaseComponent extends \Livewire\Component
 
             $fruit['customer'] = $name = $this->customer;
             $fruit['slug'] = Str::slug($name);
-            $fruit['created_at'] = $now = now();
+            $fruit['created_at'] = !isset($fruit['created_at']) ? $now : $fruit['created_at'];
             $fruit['updated_at'] = $now;
             $attr[] = $fruit;
         }
 
-        session()->flash('message', __('Purchase successfully created.'));
+        return $attr;
+    }
 
-        \App\Models\Purchase::insert($attr);
+    public function handleSubmitPurchaseInvoice(): void
+    {
+        $logs = [];
+        $this->validate();
+        try {
+            \App\Models\Purchase::insert($this->getAttr());
+
+            $logLevel = 'info';
+
+            $logs['message'] = 'Purchase successfully created.';
+
+            $logs['context']['message'] = 'Success';
+        } catch (\Throwable $e) {
+            $logLevel = 'error';
+
+            $logs['message'] = 'Purchase create failed';
+
+            $logs['context']['message'] = $e->getMessage();
+            $logs['context']['line_num'] = $e->getLine();
+        }
+
+        \Illuminate\Support\Facades\Log::$logLevel($logs['message'], $logs['context']);
+
+        session()->flash('message', __($logs['message']));
 
         $this->redirectRoute('purchase_invoices.index');
     }

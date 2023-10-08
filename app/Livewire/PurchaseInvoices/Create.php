@@ -13,6 +13,7 @@ class Create extends \App\Livewire\PurchaseComponent
         $this->fruitItems = \App\Models\FruitItem::query()
             ->orderBy('name')
             ->get(['id', 'name', 'unit', 'price']);
+        $this->purchase = new \App\Models\Purchase();
         // $this->fruits = [];
     }
 }
